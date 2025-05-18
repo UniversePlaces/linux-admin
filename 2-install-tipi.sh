@@ -25,6 +25,7 @@ curl -L https://setup.runtipi.io | bash
 get_domain
 
 # Step 3: Create settings.json
+export TIPI_DIR="$HOME/runtipi"
 export CONFIG_DIR="$HOME/runtipi/state"
 mkdir -p "$CONFIG_DIR"
 
@@ -38,7 +39,7 @@ echo "settings.json created at $CONFIG_DIR with domain: $DOMAIN"
 
 # Step 4: Restart Tipi
 echo "Restarting Tipi..."
-cd "$CONFIG_DIR"
+cd "$TIPI_DIR"
 sudo ./runtipi-cli restart
 
 echo "✅ Tipi setup complete."
