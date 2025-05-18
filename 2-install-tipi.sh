@@ -1,27 +1,39 @@
 #!/bin/bash
 
-# Run Tipi install script
+# Function to ask for domain if not provided
+get_domain() {
+  if [ -n "$1" ]; then
+    DOMAIN="$1"
+  else
+    read -p "Enter your domain name (e.g., mydomain.com): " DOMAIN
+    if [ -z "$DOMAIN" ]; then
+      echo "Error: Domain cannot be empty."
+      exit 1
+    fi
+  fi
+}
+
+# Step 1: Install Tipi
 echo "Installing Tipi..."
 curl -L https://setup.runtipi.io | bash
 
-# Ask for domain input
-read -p "Enter your domain name (e.g., mydomain.com): " DOMAIN
+# Step 2: Get domain from argument or prompt
+get_domain "$1"
 
-# Create config directory if not exists
-CONFIG_DIR=~/runtipi
+# Step 3: Create settings.json
+CONFIG_DIR="$HOME/runtipi"
 mkdir -p "$CONFIG_DIR"
 
-# Write settings.json file
 cat <<EOF > "$CONFIG_DIR/settings.json"
 {
   "domain": "$DOMAIN"
 }
 EOF
 
-echo "settings.json created with domain: $DOMAIN"
+echo "settings.json created at $CONFIG_DIR with domain: $DOMAIN"
 
-# Restart Tipi
-echo "Restarting Tipi..."
-tipi restart
+# Step 4: Restart Tipi
+cd "$CONFIG_DIR"
+sudo ./runtipi-cli restart
 
-echo "Setup complete."
+echo "✅ Tipi setup complete."
