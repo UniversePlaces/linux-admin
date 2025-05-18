@@ -25,7 +25,7 @@ curl -L https://setup.runtipi.io | bash
 get_domain
 
 # Step 3: Create settings.json
-CONFIG_DIR="$HOME/runtipi"
+export CONFIG_DIR="$HOME/runtipi/state"
 mkdir -p "$CONFIG_DIR"
 
 cat <<EOF > "$CONFIG_DIR/settings.json"
