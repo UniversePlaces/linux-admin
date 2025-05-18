@@ -12,7 +12,6 @@ curl -sSL https://raw.githubusercontent.com/UniversePlaces/linux-admin/refs/head
 curl -sSL https://raw.githubusercontent.com/UniversePlaces/linux-admin/refs/heads/main/2-install-tipi.sh | bash
 ```
 
-
 ```sh
 curl -sSL https://raw.githubusercontent.com/UniversePlaces/linux-admin/refs/heads/main/1-init-server.sh | bash
 ```
